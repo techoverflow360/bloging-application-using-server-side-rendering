@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include('./partials/head') %>
-    <title>Home Page</title>
+        <title>Home Page</title>
 </head>
+
 <body>
-    <%- include('./partials/scripts') %>
     <%- include('./partials/nav') %>
-    <!-- <h1>Home Page</h1> -->
+                <div class="container mt-4 d-flex">
+
+                    <% blogs.forEach(blog=> { %>
+                        <div class="card" style="width: 18rem;">
+                            <%
+                                // Extract username from email (assuming email format is username@domain)
+                                const username = user.email.split('@')[0];
+
+                                // Construct the image path relative to the public folder
+                                const imagePath = `/uploads/${username}/${blog.coverImageURL}`;
+                            %>
+                            <img src="<%= imagePath %>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= blog.title %>
+                                </h5>
+                                <!-- <p class="card-text">This is a blog</p> -->
+                                <a href='/blog/<%= blog._id %>' class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+                <%- include('./partials/scripts') %>
+                    <!-- <h1>Home Page</h1> -->
 
 </body>
+
 </html>
